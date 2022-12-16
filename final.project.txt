@@ -1,0 +1,277 @@
+#Class: Doctors
+class Doctors:
+    
+#Constructors
+    def __init__(self, ID, Name, Specialty, Timing, Qualification, RoomNumber):
+        self.ID = ID
+        self.Name = Name
+        self.Specialty = Specialty
+        self.Timing = Timing
+        self.Qualification = Qualification
+        self.RoomNumber = RoomNumber
+
+#Getters 
+def get_ID(self):
+        return self.ID
+def get_Name(self):
+        return self.Name 
+def get_Specialty(self):
+        return self.Specialty
+def get_Timing(self):
+        return self.Timing
+def get_Qualification(self):
+        return self.Qualification
+def get_RoomNumber(self):
+        return self.RoomNumber
+
+#Setters
+def set_ID(self, ID):
+        self.ID = ID
+def set_Name(self, Name):
+        self.Name = Name
+def set_Specialty(self, Specialty):
+        self.Specialty = Specialty
+def set_Timing(self, Timing):
+        self.Timing = Timing
+def set_Qualification(self, Qualification):
+        self.Qualification = Qualification
+def set_RoomNumber(self, RoomNumber):
+        self.Room_Number = RoomNumber
+
+
+#Function: Enter information of new Doctor.
+def enterDrInfo():
+    global ID
+    global Name
+    global Specialty
+    global Timing
+    global Qualification
+    global RoomNumber
+    ID = str(input("Enter the Doctor’s ID: "))
+    Name = input("Enter the Doctor’s name: ")
+    Specialty = str(input("Enter the Doctor’s specialty: "))
+    Timing = input("Enter the Doctor’s timing (e.g., 7am-10pm): ")
+    Qualification = str(input("Enter the Doctor’s qualification: "))
+    RoomNumber = str(input("Enter the Doctor’s room number: "))
+
+#Function: Add information of new Doctor to text file.
+def addDrToFile():
+    myfile = open("doctors.txt", "a")
+    myfile.write("\n"+ID+"_")
+    myfile.write(Name+"_")
+    myfile.write(Specialty+"_")
+    myfile.write(Timing+"_")
+    myfile.write(Qualification+"_")
+    myfile.write(RoomNumber)
+    myfile.close 
+
+#Function: Search Doctor by ID.
+IDLogDr = []
+def searchDoctorById(): 
+    ID = input("Enter the Doctor's ID: ")
+    with open("doctors.txt",'rt') as f:
+        data = f.readlines()
+    for line in data:
+        if ID in line:
+            IDLogDr.append(line)        
+            print(IDLogDr)
+    else: print("Can't find the doctor with the same ID on the system.")
+    
+#Function: Search Doctor by name.
+nameLog = []
+def searchDoctorByName():
+    Name = input("Enter the Doctor's name: ")
+    with open("doctors.txt",'rt') as f:
+        data = f.readlines()
+    for line in data:
+        if Name in line:
+            nameLog.append(line)        
+            print(nameLog)
+    else: print("Can't find the doctor with the same name on the system.")
+
+#Function: Display the information of Doctors. 
+def displayDoctorInfo():
+        with open("doctors.txt", 'r') as f:
+            print(f.read())
+
+#Function: Editing information of Doctor.
+def editDoctorInfo():
+    global Name
+    global Specialty
+    global Timing
+    global Qualification
+    global RoomNumber
+    searchDoctorById()
+    Name = input("Enter new name: ")
+    Specialty = input("Enter new specialty: ")
+    Timing = input("Enter new timing: ")
+    Qualification = input("Enter new qualification: ")
+    RoomNumber = input("Enter new room number: ")
+
+#Function: Formatting new Doctor information on text file.
+def formatDrInfo():
+    myfile = open("doctors.txt", "r")
+    replacement = ""
+    for line in myfile:
+        line = line.strip()
+        changes = line.replace("Dr.Mike", Name)
+        replacement = replacement + changes + "\n"
+    myfile.close
+    fout = open("doctors.txt", "w")
+    fout.write(replacement)
+    fout.close()
+
+    myfile = open("doctors.txt", "r")
+    replacement = ""
+    for line in myfile:
+        line = line.strip()
+        changes = line.replace("9-5pm", Timing)
+        replacement = replacement + changes + "\n"
+    myfile.close
+    fout = open("doctors.txt", "w")
+    fout.write(replacement)
+    fout.close()
+
+#Function: Display the list of facilities.
+def displayFacilities():
+    with open("facilities.txt", 'r') as f:
+            print(f.read())
+
+#Function: Add a new facility.
+def addFacility():
+    global facility
+    facility = input("Enter new facility name: ")
+
+#Function: Write facility name to the text file.
+def writeListOffacilitiesToFile():
+    myfile = open("facilities.txt", "a")
+    myfile.write("\n" + facility)
+    myfile.close
+
+#Class: Patients
+class Patients:
+
+#Constructors
+    def __init__(self, ID, Name, Disease, Gender, Age):
+        self.ID = ID
+        self.Name = Name
+        self.Disease = Disease
+        self.Gender = Gender
+        self.Age = Age
+
+#Function: Display list of patients,
+def displayPatientsList():
+    with open("patients.txt", 'r') as f:
+        print(f.read())
+
+#Function: Search patient by ID.
+def searchPatientById():
+    IDLog = []
+    ID = input("Enter the patient's ID: ")
+    with open("patients.txt",'rt') as f:
+        data = f.readlines()
+    for line in data:
+        if ID in line:
+            IDLog.append(line)        
+            print(IDLog)
+    else: print("Can't find the patient with the same ID on the system.")
+
+#Function: Enter information of new patient.
+def enterPatientInfo():
+    global ID
+    global Name
+    global Disease
+    global Gender
+    global Age
+    ID = input("Enter the patient's ID: ")
+    Name = input("Enter the patient's name: ")
+    Disease = input("Enter the patient's disease: ")
+    Gender = input("Enter the patient's gender: ")
+    Age = input("Enter the patient's age: ")
+
+#Function: Add new patient to the file.
+def addPatientToFile():
+    myfile = open("patients.txt", "a")
+    myfile.write("\n"+ID+"_")
+    myfile.write(Name+"_")
+    myfile.write(Disease+"_")
+    myfile.write(Gender+"_")
+    myfile.write(Age)
+    myfile.close 
+
+#Function: Edit information of patient.
+def editPatientInfo():
+    global Name
+    global Disease
+    global Gender
+    global Age
+    searchPatientById()
+    Name = input("Enter new name: ")
+    Disease = input("Enter new disease: ")
+    Gender = input("Enter new gender: ")
+    Age = input("Enter new age: ")
+
+#Function: Format patient information onto text file.
+def formatPatientInfo():
+    myfile = open("patients.txt", "r")
+    replacement = ""
+    for line in myfile:
+        line = line.strip()
+        changes = line.replace("Cold", Disease)
+        replacement = replacement + changes + "\n"
+    myfile.close
+    fout = open("patients.txt", "w")
+    fout.write(replacement)
+    fout.close()
+
+#Welcome Message.
+while True: 
+    welcome_msg = print ("Welcome to the Alberta Hospital (AH) Management system.")
+
+#Selection between Doctors, Facilities, Laboratories, and Patients.    
+    selection = input("Select from the following options, or enter '0' to stop: \n1 - 	Doctors \n2 - 	Facilities \n3 - 	Laboratories \n4 - 	Patients \n")
+    if selection == "1":
+        doctor_menu = input("Doctor's Menu: \n1 - Display list of Doctors \n2 - Search for Doctor by ID \n3 - Search for Doctor by name \n4 - Add Doctor \n5 - Edit Doctor information \n6 - Back to the Main Menu \n")
+        if doctor_menu == "1":
+            displayDoctorInfo()
+            continue
+        if doctor_menu == "2":
+            searchDoctorById()
+            continue
+        if doctor_menu == "3": 
+            searchDoctorByName()
+            continue
+        if doctor_menu == "4":
+            enterDrInfo()
+            addDrToFile()
+        if doctor_menu == "5":  
+            editDoctorInfo()
+            formatDrInfo()
+        if doctor_menu == "6": pass
+    if selection == "2":
+        facilities_menu = input("Facilities Menu: \n1 - Display Facilities list \n2 - Add Facility \n3 - Back to the Main Menu \n")
+        if facilities_menu == "1":
+            displayFacilities()
+        if facilities_menu == "2":
+            addFacility()
+            writeListOffacilitiesToFile()
+        if facilities_menu == "3":
+            pass
+    if selection == "3": print("Arfa's part")
+    if selection == "4":
+        patients_menu = input("Patients Menu: \n1 - Display list of patients \n2 - Search for patient by ID \n3 - Add patient \n4 - Edit patient information \n5 - Back to the Main Menu \n")
+        if patients_menu == "1":
+            displayPatientsList()
+        if patients_menu == "2":
+            searchPatientById()
+        if patients_menu == "3":
+            enterPatientInfo()
+            addPatientToFile()
+        if patients_menu == "4":
+            editPatientInfo()
+            formatPatientInfo()
+        if patients_menu == "5":
+            pass
+    if selection == "0":
+        break
+
